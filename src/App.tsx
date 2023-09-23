@@ -1,10 +1,18 @@
-import { Button } from "antd";
-
+import { Layout } from "antd";
+import SideBarContent from "./components/SideBarContent";
 function App() {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-teal-100 ">
-      <Button>hello ant design</Button>
-    </div>
+    <Layout hasSider>
+      <Layout.Sider
+        width="50px"
+        style={{
+          height: "100vh",
+          backgroundColor: "white",
+        }}
+      >
+        <SideBarContent />
+      </Layout.Sider>
+    </Layout>
   );
 }
 
