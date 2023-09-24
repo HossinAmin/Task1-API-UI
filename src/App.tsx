@@ -1,5 +1,7 @@
 import { Layout } from "antd";
 import SideBarContent from "./components/SideBarContent";
+import ApplicationSteps from "./components/ApplicationSteps";
+
 function App() {
   return (
     <Layout hasSider>
@@ -12,6 +14,9 @@ function App() {
       >
         <SideBarContent />
       </Layout.Sider>
+      <Layout.Content>
+        <ApplicationSteps />
+      </Layout.Content>
     </Layout>
   );
 }
