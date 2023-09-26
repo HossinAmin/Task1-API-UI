@@ -3,7 +3,7 @@ export default function ApplicationSteps() {
   const selected = "Application Form";
 
   return (
-    <div className="my-8 flex items-center justify-between font-semibold shadow-md">
+    <div className="flex items-center justify-between font-semibold shadow-md">
       {steps.map((text) => (
         <>
           <div
