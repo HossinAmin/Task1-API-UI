@@ -1,27 +1,18 @@
-import { Layout } from "antd";
-import SideBarContent from "./components/SideBarContent";
+import Sidebar from "./components/Sidebar";
 import ApplicationSteps from "./components/ApplicationSteps";
 import FormContainer from "./components/common/FormContainer";
 
 function App() {
   return (
-    <Layout hasSider>
-      <Layout.Sider
-        width="50px"
-        style={{
-          height: "100vh",
-          backgroundColor: "white",
-        }}
-      >
-        <SideBarContent />
-      </Layout.Sider>
-      <Layout.Content>
+    <div className="flex min-h-screen w-screen bg-white">
+      <Sidebar />
+      <main className="flex flex-grow flex-col gap-5 py-20">
         <ApplicationSteps />
         <div className="flex w-full flex-col bg-white p-10">
           <FormContainer title="Upload cover image" Children={<></>} />
         </div>
-      </Layout.Content>
-    </Layout>
+      </main>
+    </div>
   );
 }
 
