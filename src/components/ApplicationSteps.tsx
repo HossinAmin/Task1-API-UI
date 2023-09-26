@@ -16,10 +16,9 @@ export default function ApplicationSteps() {
             >
               {text}
             </p>
-            <span
-              className={`absolute right-[-10px] top-1/2 -translate-y-1/2 border-b-[20px] border-l-[20px] border-t-[20px] border-transparent 
-              ${selected === text ? "border-l-[#00635B]" : ""} `}
-            />
+            {selected === text && (
+              <span className="absolute right-[-10px] top-1/2 -translate-y-1/2 border-b-[20px] border-l-[20px] border-t-[20px] border-transparent border-l-[#00635B]" />
+            )}
           </div>
           <div
             className={
