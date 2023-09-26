@@ -1,6 +1,7 @@
-// FileUploader.tsx
+import { Icon } from "@iconify/react";
 import React, { useState } from "react";
-import { UploadOutlined } from "@ant-design/icons";
+import FormContainer from "./common/FormContainer";
+
 const FileUploader: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -16,41 +17,43 @@ const FileUploader: React.FC = () => {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center">
-      {!selectedFile && (
-        <>
-          <UploadOutlined className="text-5xl" />
-
-          <input
-            type="file"
-            accept="image/*"
-            placeholder="none"
-            onChange={handleFileChange}
-            className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
-          />
-          <p className="text-center text-2xl font-semibold">
-            Upload cover image
-          </p>
-          <p className="ant-upload-hint">
-            16:9 ratio is recommended. Max image size 1mb
-          </p>
-        </>
-      )}
-
-      {selectedFile && (
-        <div className="felx h-full w-full flex-col gap-2 bg-white">
-          <img
-            src={URL.createObjectURL(selectedFile)}
-            alt="Preview-image"
-            className="h-1/2 "
-          />
-          <div className="flex w-full justify-between">
-            <p>Delete & Reupload</p>
-            <button onClick={handleDelete}>X</button>
+    <FormContainer title="Upload cover image">
+      <div className="relative h-full w-full p-5">
+        {!selectedFile && (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed p-2">
+            <Icon className="text-3xl" icon="icon-park-outline:upload" />
+            <input
+              type="file"
+              accept="image/*"
+              placeholder="none"
+              onChange={handleFileChange}
+              className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
+            />
+            <p className="text-center font-semibold">Upload cover image</p>
+            <p className="text-text-sub text-xs">
+              16:9 ratio is recommended. Max image size 1mb
+            </p>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+
+        {selectedFile && (
+          <div className="flex h-full w-full cursor-pointer flex-col gap-5 bg-white ">
+            <img
+              src={URL.createObjectURL(selectedFile)}
+              alt="Preview-image"
+              className="aspect-video w-full"
+            />
+            <div
+              onClick={handleDelete}
+              className="text-error flex w-full items-center text-xs font-bold hover:opacity-50 active:opacity-90 "
+            >
+              <Icon className="text-xl" icon="ic:sharp-close" />
+              <p>Delete & re-upload</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </FormContainer>
   );
 };
 
