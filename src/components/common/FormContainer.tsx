@@ -11,7 +11,7 @@ export default function FormContainer({ title, Children }: FormContainerProps) {
       <div className="w-full bg-[#D0F7FA] px-4 py-2">
         <p>{title} </p>
       </div>
-      <div className="px-4 py-2">{Children}</div>
+      {Children}
     </div>
   );
 }
