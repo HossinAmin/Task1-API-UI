@@ -2,18 +2,19 @@ import { createContext, ReactNode, useState } from "react";
 import { ApplicationFormDataResponse } from "../types/AppFormData";
 
 export const AppFormDataContext = createContext<{
-  appFormData?: ApplicationFormDataResponse;
-  setAppFormData?: React.Dispatch<
-    React.SetStateAction<ApplicationFormDataResponse | undefined>
+  appFormData: ApplicationFormDataResponse | null;
+  setAppFormData: React.Dispatch<
+    React.SetStateAction<ApplicationFormDataResponse | null>
   >;
-}>({});
+} | null>(null);
 
 export default function AppFormDataContextProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [appFormData, setAppFormData] = useState<ApplicationFormDataResponse>();
+  const [appFormData, setAppFormData] =
+    useState<ApplicationFormDataResponse | null>(null);
 
   return (
     <AppFormDataContext.Provider value={{ appFormData, setAppFormData }}>
