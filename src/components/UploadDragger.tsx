@@ -30,7 +30,7 @@ const FileUploader: React.FC = () => {
               className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
             />
             <p className="text-center font-semibold">Upload cover image</p>
-            <p className="text-text-sub text-xs">
+            <p className="text-xs text-text-sub">
               16:9 ratio is recommended. Max image size 1mb
             </p>
           </div>
@@ -45,7 +45,7 @@ const FileUploader: React.FC = () => {
             />
             <div
               onClick={handleDelete}
-              className="text-error flex w-full items-center text-xs font-bold hover:opacity-50 active:opacity-90 "
+              className="flex w-full items-center text-xs font-bold text-error hover:opacity-50 active:opacity-90 "
             >
               <Icon className="text-xl" icon="ic:sharp-close" />
               <p>Delete & re-upload</p>
