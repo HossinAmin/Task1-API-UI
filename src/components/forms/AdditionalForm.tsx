@@ -1,41 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Icon } from "@iconify/react";
-import { CustomisedQuestion } from "~/types/AppFormData";
 import FormContainer from "~/components/common/FormContainer";
 import CreateQuestionForm from "./CreateQuestion/Form";
+import useAppFormData from "~/hooks/useAppFormData";
 
 export default function AdditionalForm() {
-  const [additionalQuestion, setAdditionalQuestion] = useState<
-    CustomisedQuestion[]
-  >([]);
+  const { appFormData } = useAppFormData();
   const [addQuestion, setAddQuestion] = useState(false);
 
-  useEffect(() => {
-    setAdditionalQuestion([
-      {
-        type: "FileUpload",
-        question: "<string>",
-        id: "<uuid>",
-        choices: ["<string>", "<string>"],
-        maxChoice: "<integer>",
-        disqualify: false,
-        other: false,
-      },
-      {
-        type: "MultipleChoice",
-        question: "<string>",
-        id: "<uuid>",
-        choices: ["<string>", "<string>"],
-        maxChoice: "<integer>",
-        disqualify: false,
-        other: false,
-      },
-    ]);
-  }, []);
+  const additionalQuestion = appFormData?.data.attributes.customisedQuestions;
+
   return (
     <FormContainer title="Additional Questions">
       <div className="flex  flex-col items-start  gap-5 px-3 py-5 text-lg">
-        {additionalQuestion.map((question) => {
+        {additionalQuestion?.map((question) => {
           return (
             <div
               key={question.id}
