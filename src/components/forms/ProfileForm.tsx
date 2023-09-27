@@ -3,49 +3,25 @@ import FormContainer from "../common/FormContainer";
 import Switch from "../common/Switch";
 import { Icon } from "@iconify/react";
 
-export default function PersonalInfoForm() {
-  const [personalInfo, setPersonalInfo] = useState({});
+export default function ProfileForm() {
+  const [profileInfo, setProfileInfo] = useState({});
   useEffect(() => {
-    setPersonalInfo({
-      firstName: {
-        internalUse: false,
+    setProfileInfo({
+      education: {
+        mandatory: true,
         show: true,
       },
-      lastName: {
-        internalUse: false,
+      experience: {
+        mandatory: true,
         show: true,
       },
-      emailId: {
-        internalUse: false,
+      resume: {
+        mandatory: true,
         show: true,
       },
-      phoneNumber: {
-        internalUse: false,
-        show: true,
-      },
-      nationality: {
-        internalUse: false,
-        show: true,
-      },
-      currentResidence: {
-        internalUse: false,
-        show: true,
-      },
-      idNumber: {
-        internalUse: false,
-        show: true,
-      },
-      dateOfBirth: {
-        internalUse: false,
-        show: true,
-      },
-      gender: {
-        internalUse: false,
-        show: true,
-      },
-      personalQuestions: [
+      profileQuestions: [
         {
-          type: "YesNo",
+          type: "FileUpload",
           question: "<string>",
           id: "<uuid>",
           choices: ["<string>", "<string>"],
@@ -54,7 +30,7 @@ export default function PersonalInfoForm() {
           other: false,
         },
         {
-          type: "Dropdown",
+          type: "Date",
           question: "<string>",
           id: "<uuid>",
           choices: ["<string>", "<string>"],
@@ -68,7 +44,7 @@ export default function PersonalInfoForm() {
   return (
     <FormContainer title="Personal Information">
       <div className="flex flex-col items-start  gap-5 px-3 py-5 text-lg">
-        {Object.entries(personalInfo).map(([key, value]) => {
+        {Object.entries(profileInfo).map(([key, value]) => {
           return (
             <div
               key={key}
@@ -77,7 +53,7 @@ export default function PersonalInfoForm() {
               <p>{key}</p>
               <div className="flex items-center gap-2 text-xs text-gray-400">
                 <input type="checkbox" value={value.internal} />
-                <span>Internal</span>
+                <span>Mandatory</span>
                 <Switch checked={value.show} />
               </div>
             </div>
