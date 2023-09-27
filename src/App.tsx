@@ -3,18 +3,17 @@ import ApplicationSteps from "./components/ApplicationSteps";
 import UploadDragger from "./components/UploadDragger";
 import useAppFormData from "./hooks/useAppFormData";
 import { useEffect } from "react";
-import PersonalInfoForm from "./components/forms/personalInfoForm";
+import PersonalInfoForm from "./components/forms/PersonalInfoForm";
 import ProfileForm from "./components/forms/ProfileForm";
 import AdditionalForm from "./components/forms/AdditionalForm";
 
 function App() {
-  // const { fetchAppFormData, appFormData } = useAppFormData();
+  const { fetchAppFormData } = useAppFormData();
 
-  // // inital fetch
-  // useEffect(() => {
-  //   fetchAppFormData();
-  // }, [fetchAppFormData]);
-  // console.log(appFormData);
+  // inital fetch
+  useEffect(() => {
+    fetchAppFormData();
+  }, [fetchAppFormData]);
 
   return (
     <div className="flex min-h-screen bg-white">
