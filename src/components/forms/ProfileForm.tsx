@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import FormContainer from "../common/FormContainer";
-import Switch from "../common/Switch";
 import { Icon } from "@iconify/react";
+import FormContainer from "~/components/common/FormContainer";
+import Switch from "~/components/common/Switch";
+import CreateQuestionForm from "./CreateQuestion/Form";
 
 export default function ProfileForm() {
   const [profileInfo, setProfileInfo] = useState({});
+  const [addQuestion, setAddQuestion] = useState(false);
+
   useEffect(() => {
     setProfileInfo({
       education: {
@@ -59,11 +62,19 @@ export default function ProfileForm() {
             </div>
           );
         })}
-        <button className="flex items-center px-1 py-2 text-xs font-bold">
+        <button
+          onClick={() => setAddQuestion(true)}
+          className="flex items-center px-1 py-2 text-xs font-bold"
+        >
           <Icon className="text-2xl" icon="ic:round-add" />
           <p>add question</p>
         </button>
       </div>
+
+      <CreateQuestionForm
+        open={addQuestion}
+        close={() => setAddQuestion(false)}
+      />
     </FormContainer>
   );
 }

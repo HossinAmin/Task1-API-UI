@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import FormContainer from "../common/FormContainer";
-import Switch from "../common/Switch";
+import FormContainer from "~/components/common/FormContainer";
+import Switch from "~/components/common/Switch";
 import { Icon } from "@iconify/react";
+import CreateQuestionForm from "./CreateQuestion/Form";
 
 export default function PersonalInfoForm() {
   const [personalInfo, setPersonalInfo] = useState({});
+  const [addQuestion, setAddQuestion] = useState(false);
+
   useEffect(() => {
     setPersonalInfo({
       firstName: {
@@ -65,6 +68,7 @@ export default function PersonalInfoForm() {
       ],
     });
   }, []);
+
   return (
     <FormContainer title="Personal Information">
       <div className="flex flex-col items-start  gap-5 px-3 py-5 text-lg">
@@ -83,11 +87,19 @@ export default function PersonalInfoForm() {
             </div>
           );
         })}
-        <button className="flex items-center px-1 py-2 text-xs font-bold">
+        <button
+          onClick={() => setAddQuestion(true)}
+          className="flex items-center px-1 py-2 text-xs font-bold"
+        >
           <Icon className="text-2xl" icon="ic:round-add" />
           <p>add question</p>
         </button>
       </div>
+
+      <CreateQuestionForm
+        open={addQuestion}
+        close={() => setAddQuestion(false)}
+      />
     </FormContainer>
   );
 }

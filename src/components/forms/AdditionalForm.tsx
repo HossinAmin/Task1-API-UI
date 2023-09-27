@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import FormContainer from "../common/FormContainer";
 import { Icon } from "@iconify/react";
-import { CustomisedQuestion } from "../../types/AppFormData";
+import { CustomisedQuestion } from "~/types/AppFormData";
+import FormContainer from "~/components/common/FormContainer";
+import CreateQuestionForm from "./CreateQuestion/Form";
 
 export default function AdditionalForm() {
   const [additionalQuestion, setAdditionalQuestion] = useState<
     CustomisedQuestion[]
   >([]);
+  const [addQuestion, setAddQuestion] = useState(false);
+
   useEffect(() => {
     setAdditionalQuestion([
       {
@@ -47,11 +50,19 @@ export default function AdditionalForm() {
             </div>
           );
         })}
-        <button className="flex items-center px-1 py-2 text-xs font-bold">
+        <button
+          onClick={() => setAddQuestion(true)}
+          className="flex items-center px-1 py-2 text-xs font-bold"
+        >
           <Icon className="text-2xl" icon="ic:round-add" />
           <p>add question</p>
         </button>
       </div>
+
+      <CreateQuestionForm
+        open={addQuestion}
+        close={() => setAddQuestion(false)}
+      />
     </FormContainer>
   );
 }
