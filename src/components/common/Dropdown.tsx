@@ -25,7 +25,6 @@ export default function Dropdown({
     setSelectedOption(option);
     setIsOpen(false);
 
-    // Call onSelect prop with the selected option
     if (onSelect) {
       onSelect(option);
     }
@@ -50,7 +49,10 @@ export default function Dropdown({
           {options.map((option) => (
             <button
               key={option}
-              onClick={() => selectOption(option)}
+              onClick={(e) => {
+                e.stopPropagation();
+                selectOption(option);
+              }}
               className={`block w-full px-4 py-2 text-left hover:bg-blue-100 ${
                 selectedOption === option ? "bg-blue-200" : ""
               }`}

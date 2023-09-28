@@ -3,20 +3,45 @@ import { useState } from "react";
 import { QuestionTypes } from "~/constants/questions";
 import Dropdown from "~/components/common/Dropdown";
 import AdditionalFields from "./AdditionalFileds";
+import useCustomQuestion from "~/hooks/useCustomQuestion";
+import { FormType } from "~/types/FormType";
+import useAppFormData from "~/hooks/useAppFormData";
+interface CreateQuestionFormProps {
+  open: boolean;
+  close: () => void;
+  formType: FormType;
+  // Add other props here as needed
+}
 
-export default function CreateQuestionForm({ open = false, close = () => {} }) {
+export default function CreateQuestionForm({
+  open = false,
+  close = () => {},
+  formType,
+}: CreateQuestionFormProps) {
   const [questionType, setQuestionType] = useState("");
+  const { customQuestion, updateQuestion, updateType, clearCustomQuestion } =
+    useCustomQuestion();
+  const { appendNewQuestion } = useAppFormData();
+
+  const handleSubmit = () => {
+    // append in global state
+    appendNewQuestion(formType, customQuestion);
+    // close form
+    close();
+    // clear custom Question
+    clearCustomQuestion();
+  };
 
   if (open) {
     return (
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="flex w-full flex-col gap-8 p-5 text-base"
-      >
+      <div className="flex w-full flex-col gap-8 p-5 text-base">
         <span className="flex flex-col gap-1">
           <p>Type</p>
           <Dropdown
-            onSelect={(selectedOption) => setQuestionType(selectedOption)}
+            onSelect={(selectedOption) => {
+              setQuestionType(selectedOption);
+              updateType(selectedOption);
+            }}
             options={Object.values(QuestionTypes)}
             placeholder={Object.values(QuestionTypes)[0]}
           />
@@ -27,8 +52,7 @@ export default function CreateQuestionForm({ open = false, close = () => {} }) {
             className="common-input"
             type="text"
             placeholder="Type here"
-            minLength={20}
-            required
+            onBlur={(e) => updateQuestion(e.target.value)}
           />
         </span>
         <AdditionalFields questionType={questionType} />
@@ -41,11 +65,14 @@ export default function CreateQuestionForm({ open = false, close = () => {} }) {
             <Icon icon="mdi:close-thick" className="text-lg " />
             <p>Delete</p>
           </button>
-          <button className="rounded-lg bg-green-700 px-2 py-1 text-white hover:bg-green-700/80 active:bg-green-700/90">
+          <button
+            onClick={handleSubmit}
+            className="rounded-lg bg-green-700 px-2 py-1 text-white hover:bg-green-700/80 active:bg-green-700/90"
+          >
             save
           </button>
         </div>
-      </form>
+      </div>
     );
   }
 }

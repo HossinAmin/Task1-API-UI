@@ -1,82 +1,35 @@
-import { useState, useEffect } from "react";
+// React and Hooks
+import { useState } from "react";
+
+// Icon Libraries
+import { Icon } from "@iconify/react";
+
+// Custom Hooks and Components
+import useAppFormData from "~/hooks/useAppFormData";
 import FormContainer from "~/components/common/FormContainer";
 import Switch from "~/components/common/Switch";
-import { Icon } from "@iconify/react";
 import CreateQuestionForm from "./CreateQuestion/Form";
+import AdditionalQuestionItem from "../common/additionalQuestionItem";
 
 export default function PersonalInfoForm() {
-  const [personalInfo, setPersonalInfo] = useState({});
+  const { appFormData } = useAppFormData();
   const [addQuestion, setAddQuestion] = useState(false);
 
-  useEffect(() => {
-    setPersonalInfo({
-      firstName: {
-        internalUse: false,
-        show: true,
-      },
-      lastName: {
-        internalUse: false,
-        show: true,
-      },
-      emailId: {
-        internalUse: false,
-        show: true,
-      },
-      phoneNumber: {
-        internalUse: false,
-        show: true,
-      },
-      nationality: {
-        internalUse: false,
-        show: true,
-      },
-      currentResidence: {
-        internalUse: false,
-        show: true,
-      },
-      idNumber: {
-        internalUse: false,
-        show: true,
-      },
-      dateOfBirth: {
-        internalUse: false,
-        show: true,
-      },
-      gender: {
-        internalUse: false,
-        show: true,
-      },
-      personalQuestions: [
-        {
-          type: "YesNo",
-          question: "<string>",
-          id: "<uuid>",
-          choices: ["<string>", "<string>"],
-          maxChoice: "<integer>",
-          disqualify: false,
-          other: false,
-        },
-        {
-          type: "Dropdown",
-          question: "<string>",
-          id: "<uuid>",
-          choices: ["<string>", "<string>"],
-          maxChoice: "<integer>",
-          disqualify: false,
-          other: false,
-        },
-      ],
-    });
-  }, []);
+  const personalInfoQuestions =
+    appFormData?.data.attributes.personalInformation;
+  const additionalQuestions = personalInfoQuestions?.personalQuestions || [];
 
   return (
     <FormContainer title="Personal Information">
-      <div className="flex flex-col items-start  gap-5 px-3 py-5 text-lg">
-        {Object.entries(personalInfo).map(([key, value]) => {
+      <div className="flex flex-col items-start gap-5 px-3 py-5 text-lg">
+        {Object.entries(personalInfoQuestions || {}).map(([key, value]) => {
+          if (key === "personalQuestions") {
+            return null; // Skip personalQuestions key
+          }
           return (
             <div
               key={key}
-              className="flex w-full justify-between border-b-2 py-3 "
+              className="flex w-full justify-between border-b-2 py-3"
             >
               <p>{key}</p>
               <div className="flex items-center gap-2 text-xs text-gray-400">
@@ -87,6 +40,11 @@ export default function PersonalInfoForm() {
             </div>
           );
         })}
+
+        {additionalQuestions.map((question, index) => (
+          <AdditionalQuestionItem key={index} question={question} />
+        ))}
+
         <button
           onClick={() => setAddQuestion(true)}
           className="flex items-center px-1 py-2 text-xs font-bold"
@@ -97,6 +55,7 @@ export default function PersonalInfoForm() {
       </div>
 
       <CreateQuestionForm
+        formType="personalInfo"
         open={addQuestion}
         close={() => setAddQuestion(false)}
       />
