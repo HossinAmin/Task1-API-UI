@@ -11,7 +11,7 @@ export const CustomQuestionContext = createContext<
 >(undefined);
 
 export const customQuestionIntial = {
-  type: "",
+  type: "Paragraph",
   question: "",
   id: "",
   choices: [],
