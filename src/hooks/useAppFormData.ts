@@ -69,13 +69,10 @@ export default function useAppFormData() {
             ...prev!.data,
             attributes: {
               ...prev!.data.attributes,
-              personalInformation: {
-                ...prev!.data.attributes.personalInformation,
-                customisedQuestions: [
-                  ...prev!.data.attributes.customisedQuestions,
-                  newQuestion,
-                ],
-              },
+              customisedQuestions: [
+                ...prev!.data.attributes.customisedQuestions,
+                newQuestion,
+              ],
             },
           },
         };
