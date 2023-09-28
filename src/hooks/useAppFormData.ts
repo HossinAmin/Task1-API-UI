@@ -1,9 +1,9 @@
 import { AppFormDataContext } from "../context/AppFormDataContextProvider";
 import { useCallback, useContext } from "react";
-// import data from "~/data.json";
 import { CustomisedQuestion } from "~/types/AppFormData";
 import { FormType } from "~/types/FormType";
 
+// replace with your api url
 const api_url =
   "https://6672e035-212f-45db-b0f6-fb6c5262e5c9.mock.pstmn.io/api/1/programs/1/application-form";
 
@@ -21,7 +21,6 @@ export default function useAppFormData() {
   const { appFormData, setAppFormData } = useAppFormContext();
 
   const fetchAppFormData = useCallback(async () => {
-    // remove appi set global state with fixed value
     try {
       const res = await fetch(api_url);
       const data = await res.json();
@@ -29,8 +28,6 @@ export default function useAppFormData() {
     } catch (err: any) {
       console.error(err.message);
     }
-
-    // setAppFormData(data as ApplicationFormDataResponse);
   }, []);
 
   const appendNewQuestion = (
@@ -98,5 +95,26 @@ export default function useAppFormData() {
     }
   };
 
-  return { appFormData, fetchAppFormData, appendNewQuestion };
+  const sendAppFormData = useCallback(async () => {
+    try {
+      const res = await fetch(api_url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appFormData),
+      });
+      if (res.ok) {
+        // Request was successful
+        console.log("Data sent successfully");
+      } else {
+        // Handle error cases here
+        console.error("Failed to send data to the server");
+      }
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  }, []);
+  return { appFormData, fetchAppFormData, appendNewQuestion, sendAppFormData };
 }
