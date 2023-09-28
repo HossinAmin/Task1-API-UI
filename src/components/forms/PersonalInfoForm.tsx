@@ -9,7 +9,7 @@ import useAppFormData from "~/hooks/useAppFormData";
 import FormContainer from "~/components/common/FormContainer";
 import Switch from "~/components/common/Switch";
 import CreateQuestionForm from "./CreateQuestion/Form";
-import AdditionalQuestionItem from "../common/additionalQuestionItem";
+import AdditionalQuestionItem from "../common/AdditionalQuestionItem";
 
 export default function PersonalInfoForm() {
   const { appFormData } = useAppFormData();

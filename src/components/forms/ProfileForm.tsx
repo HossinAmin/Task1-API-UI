@@ -9,7 +9,7 @@ import FormContainer from "~/components/common/FormContainer";
 import Switch from "~/components/common/Switch";
 import CreateQuestionForm from "./CreateQuestion/Form";
 import useAppFormData from "~/hooks/useAppFormData";
-import AdditionalQuestionItem from "../common/additionalQuestionItem";
+import AdditionalQuestionItem from "../common/AdditionalQuestionItem";
 
 export default function ProfileForm() {
   const { appFormData } = useAppFormData();

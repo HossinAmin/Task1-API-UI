@@ -8,7 +8,7 @@ import { Icon } from "@iconify/react";
 import FormContainer from "~/components/common/FormContainer";
 import CreateQuestionForm from "./CreateQuestion/Form";
 import useAppFormData from "~/hooks/useAppFormData";
-import AdditionalQuestionItem from "../common/additionalQuestionItem";
+import AdditionalQuestionItem from "../common/AdditionalQuestionItem";
 
 export default function AdditionalForm() {
   const { appFormData } = useAppFormData();

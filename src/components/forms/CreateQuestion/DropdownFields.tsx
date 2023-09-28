@@ -11,7 +11,6 @@ function DropdownFields() {
   const { updateChoices, updateOther } = useCustomQuestion();
 
   const [fields, setFields] = useState<Field[]>([{ id: 1, value: "" }]);
-  const [allowOthers, setAllowOthers] = useState(false);
 
   function addField() {
     const newField = { id: fields.length + 1, value: "" };

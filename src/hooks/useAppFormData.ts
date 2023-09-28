@@ -1,10 +1,7 @@
 import { AppFormDataContext } from "../context/AppFormDataContextProvider";
 import { useCallback, useContext } from "react";
-import data from "~/data.json";
-import {
-  ApplicationFormDataResponse,
-  CustomisedQuestion,
-} from "~/types/AppFormData";
+// import data from "~/data.json";
+import { CustomisedQuestion } from "~/types/AppFormData";
 import { FormType } from "~/types/FormType";
 
 const api_url =
@@ -25,15 +22,15 @@ export default function useAppFormData() {
 
   const fetchAppFormData = useCallback(async () => {
     // remove appi set global state with fixed value
-    // try {
-    //   const res = await fetch(api_url);
-    //   const data = await res.json();
-    //   setAppFormData(data);
-    // } catch (err: any) {
-    //   console.error(err.message);
-    // }
+    try {
+      const res = await fetch(api_url);
+      const data = await res.json();
+      setAppFormData(data);
+    } catch (err: any) {
+      console.error(err.message);
+    }
 
-    setAppFormData(data as ApplicationFormDataResponse);
+    // setAppFormData(data as ApplicationFormDataResponse);
   }, []);
 
   const appendNewQuestion = (
