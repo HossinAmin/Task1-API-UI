@@ -98,7 +98,7 @@ export default function useAppFormData() {
   const sendAppFormData = useCallback(async () => {
     try {
       const res = await fetch(api_url, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
