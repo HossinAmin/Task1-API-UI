@@ -99,7 +99,6 @@ export default function useAppFormData() {
     try {
       const res = await fetch(api_url, {
         method: "POST",
-        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
