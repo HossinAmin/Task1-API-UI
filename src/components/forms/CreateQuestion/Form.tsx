@@ -19,17 +19,30 @@ export default function CreateQuestionForm({
   formType,
 }: CreateQuestionFormProps) {
   const [questionType, setQuestionType] = useState("");
-  const { customQuestion, updateQuestion, updateType, clearCustomQuestion } =
-    useCustomQuestion();
-  const { appendNewQuestion } = useAppFormData();
+  const [errorMessage, setErrorMessage] = useState<string | null>("");
+
+  const {
+    customQuestion,
+    updateQuestion,
+    updateType,
+    clearCustomQuestion,
+    validateCustomQuestion,
+  } = useCustomQuestion();
+  const { appendNewQuestion, sendAppFormData } = useAppFormData();
 
   const handleSubmit = () => {
-    // append in global state
-    appendNewQuestion(formType, customQuestion);
-    // close form
-    close();
-    // clear custom Question
-    clearCustomQuestion();
+    // validates new Question
+    setErrorMessage(validateCustomQuestion());
+    if (errorMessage == null) {
+      // append in global state
+      appendNewQuestion(formType, customQuestion);
+      // send updated version to server
+      sendAppFormData();
+      // close form
+      close();
+      // clear custom Question
+      clearCustomQuestion();
+    }
   };
 
   if (open) {
@@ -57,6 +70,7 @@ export default function CreateQuestionForm({
         </span>
         <AdditionalFields questionType={questionType} />
 
+        {errorMessage && <p className="text-error">{errorMessage}</p>}
         <div className="flex items-end justify-between py-5">
           <button
             onClick={close}

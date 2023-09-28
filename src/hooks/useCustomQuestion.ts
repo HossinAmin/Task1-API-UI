@@ -43,6 +43,13 @@ export default function useCustomQuestion() {
     setCustomQuestion({ ...customQuestion, other: newValue });
   };
 
+  const validateCustomQuestion = (): string | null => {
+    if (customQuestion.question === "") {
+      return "Question can't be empty";
+    }
+    return null;
+  };
+
   const clearCustomQuestion = () => {
     setCustomQuestion(customQuestionIntial);
   };
@@ -54,6 +61,7 @@ export default function useCustomQuestion() {
     updateMaxChoice,
     updateDisqualify,
     updateOther,
+    validateCustomQuestion,
     clearCustomQuestion,
   };
 }
