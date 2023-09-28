@@ -38,6 +38,7 @@ export default function AdditionalForm() {
       </div>
 
       <CreateQuestionForm
+        formType="additional"
         open={addQuestion}
         close={() => setAddQuestion(false)}
       />

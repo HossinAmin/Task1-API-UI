@@ -10,6 +10,16 @@ export const CustomQuestionContext = createContext<
   CustomQuestionContextType | undefined
 >(undefined);
 
+export const customQuestionIntial = {
+  type: "",
+  question: "",
+  id: "",
+  choices: [],
+  maxChoice: "",
+  disqualify: false,
+  other: false,
+};
+
 interface CustomQuestionProviderProps {
   children: ReactNode;
 }
@@ -17,15 +27,8 @@ interface CustomQuestionProviderProps {
 export function CustomQuestionProvider({
   children,
 }: CustomQuestionProviderProps) {
-  const [customQuestion, setCustomQuestion] = useState<CustomisedQuestion>({
-    type: "",
-    question: "",
-    id: "",
-    choices: [],
-    maxChoice: "",
-    disqualify: false,
-    other: false,
-  });
+  const [customQuestion, setCustomQuestion] =
+    useState<CustomisedQuestion>(customQuestionIntial);
 
   return (
     <CustomQuestionContext.Provider

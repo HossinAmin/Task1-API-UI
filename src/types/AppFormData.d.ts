@@ -1,16 +1,5 @@
-export type QuestionType =
-  | "Paragraph"
-  | "ShortAnswer"
-  | "YesNo"
-  | "Dropdown"
-  | "MultipleChoice"
-  | "Date"
-  | "Number"
-  | "FileUpload"
-  | "VideoQuestion";
-
 export interface PersonalQuestion {
-  type: QuestionType;
+  type: string;
   question: string;
   id: string;
   choices: string[];
@@ -20,7 +9,7 @@ export interface PersonalQuestion {
 }
 
 export interface ProfileQuestion {
-  type: QuestionType;
+  type: string;
   question: string;
   id: string;
   choices: string[];
@@ -30,7 +19,7 @@ export interface ProfileQuestion {
 }
 
 export interface CustomisedQuestion {
-  type: QuestionType;
+  type: string;
   question: string;
   id: string;
   choices: string[];

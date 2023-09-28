@@ -40,6 +40,7 @@ export default function ProfileForm() {
       </div>
 
       <CreateQuestionForm
+        formType="profile"
         open={addQuestion}
         close={() => setAddQuestion(false)}
       />

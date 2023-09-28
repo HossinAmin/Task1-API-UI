@@ -1,5 +1,8 @@
 import { useContext } from "react";
-import { CustomQuestionContext } from "~/context/CustomQuestionContextProvider";
+import {
+  CustomQuestionContext,
+  customQuestionIntial,
+} from "~/context/CustomQuestionContextProvider";
 
 export function useCustomQuestionContext() {
   const context = useContext(CustomQuestionContext);
@@ -29,15 +32,19 @@ export default function useCustomQuestion() {
     setCustomQuestion({ ...customQuestion, maxChoice: newMaxChoice });
   };
 
-  const updateDisqualify = () => {
+  const updateDisqualify = (newValue: boolean) => {
     setCustomQuestion({
       ...customQuestion,
-      disqualify: !customQuestion.disqualify,
+      disqualify: newValue,
     });
   };
 
-  const updateOther = () => {
-    setCustomQuestion({ ...customQuestion, other: !customQuestion.other });
+  const updateOther = (newValue: boolean) => {
+    setCustomQuestion({ ...customQuestion, other: newValue });
+  };
+
+  const clearCustomQuestion = () => {
+    setCustomQuestion(customQuestionIntial);
   };
   return {
     customQuestion,
@@ -47,5 +54,6 @@ export default function useCustomQuestion() {
     updateMaxChoice,
     updateDisqualify,
     updateOther,
+    clearCustomQuestion,
   };
 }

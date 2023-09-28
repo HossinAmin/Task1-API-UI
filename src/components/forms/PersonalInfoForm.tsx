@@ -40,6 +40,7 @@ export default function PersonalInfoForm() {
       </div>
 
       <CreateQuestionForm
+        formType="personalInfo"
         open={addQuestion}
         close={() => setAddQuestion(false)}
       />
