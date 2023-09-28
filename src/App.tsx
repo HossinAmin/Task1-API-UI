@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import PersonalInfoForm from "./components/forms/PersonalInfoForm";
 import ProfileForm from "./components/forms/ProfileForm";
 import AdditionalForm from "./components/forms/AdditionalForm";
+import { CustomQuestionProvider } from "./context/CustomQuestionContextProvider";
 
 function App() {
   const { fetchAppFormData } = useAppFormData();
@@ -22,9 +23,11 @@ function App() {
         <ApplicationSteps />
         <div className="flex w-full flex-col gap-16 bg-white p-10">
           <UploadDragger />
-          <PersonalInfoForm />
-          <ProfileForm />
-          <AdditionalForm />
+          <CustomQuestionProvider>
+            <PersonalInfoForm />
+            <ProfileForm />
+            <AdditionalForm />
+          </CustomQuestionProvider>
         </div>
       </main>
     </div>

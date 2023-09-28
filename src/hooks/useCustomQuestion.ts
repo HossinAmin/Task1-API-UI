@@ -1,0 +1,51 @@
+import { useContext } from "react";
+import { CustomQuestionContext } from "~/context/CustomQuestionContextProvider";
+
+export function useCustomQuestionContext() {
+  const context = useContext(CustomQuestionContext);
+  if (!context) {
+    throw new Error(
+      "useCustomQuestion must be used within a CustomQuestionProvider",
+    );
+  }
+  return context;
+}
+
+export default function useCustomQuestion() {
+  const { customQuestion, setCustomQuestion } = useCustomQuestionContext();
+  const updateType = (newType: string) => {
+    setCustomQuestion({ ...customQuestion, type: newType });
+  };
+
+  const updateQuestion = (newQuestion: string) => {
+    setCustomQuestion({ ...customQuestion, question: newQuestion });
+  };
+
+  const updateChoices = (newChoices: string[]) => {
+    setCustomQuestion({ ...customQuestion, choices: newChoices });
+  };
+
+  const updateMaxChoice = (newMaxChoice: string) => {
+    setCustomQuestion({ ...customQuestion, maxChoice: newMaxChoice });
+  };
+
+  const updateDisqualify = () => {
+    setCustomQuestion({
+      ...customQuestion,
+      disqualify: !customQuestion.disqualify,
+    });
+  };
+
+  const updateOther = () => {
+    setCustomQuestion({ ...customQuestion, other: !customQuestion.other });
+  };
+  return {
+    customQuestion,
+    updateType,
+    updateQuestion,
+    updateChoices,
+    updateMaxChoice,
+    updateDisqualify,
+    updateOther,
+  };
+}
